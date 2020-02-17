@@ -1,0 +1,73 @@
+﻿@model Esercitazione.Models.IndexModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <label for="TitleProblem">@Model.LabelTitleProblem</label>
+                        @Html.TextBoxFor(t => t.Contatto.TitleProblem, new { @class = "form-control fadeIn second", placeholder = Model.LabelTitleProblem })
+                        @Html.ValidationMessageFor(t => t.Contatto.TitleProblem)
+                    </div>
+                </div>
+                <div class="col-md-offset-1 col-md-4">
+                    <div class="form-group">
+                        <label for="Name">@Model.LabelNameUser</label>
+                        @Html.TextBoxFor(t => t.Contatto.NameUser, new { @class = "form-control fadeIn second", placeholder = Model.LabelNameUser })
+                        @Html.ValidationMessageFor(t => t.Contatto.NameUser)
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <label for="Email">@Model.LabelEmailUser</label>
+                        @Html.TextBoxFor(t => t.Contatto.EmailUser, new { @class = "form-control fadeIn second", placeholder = Model.LabelNameUser })
+                        @Html.ValidationMessageFor(t => t.Contatto.EmailUser)
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <label for="Description">@Model.LabelDescription</label>
+                        @Html.PasswordFor(t => t.Contatto.Description, new { @class = "form-control fadeIn third", placeholder = Model.LabelDescription })
+                        @Html.ValidationMessageFor(t => t.Contatto.Description)
+                    </div>
+                </div>
+                
+            </div>
+            
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <input type="submit" value="@Model.LabelButton" class="btn btn-primary" />
+                </div>
+            </div>
+            if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-4">
+                        <p style="color:red">@Html.Raw(Model.ErrorMessage) </p>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
